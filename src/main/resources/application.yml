@@ -9,6 +9,10 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+jwt:
+  publicKey: classpath:app.pub
+  privateKey: classpath:app.key
+
 
 server:
   error:

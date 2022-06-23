@@ -3,31 +3,31 @@ package pl.ilias.shop.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.ilias.shop.model.dao.Role;
 import pl.ilias.shop.model.dao.User;
 import pl.ilias.shop.repository.RoleRepository;
 import pl.ilias.shop.repository.UserRepository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User save(User user) {
         roleRepository.findByName("ROLE_USER").ifPresent(role -> user.setRoleList(Collections.singletonList(role)));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     public User getById(Long id) {
-        return userRepository.getById(id);
+        return userRepository.getReferenceById(id);
     }
 
     public void deleteById(Long id) {

@@ -2,6 +2,7 @@ package pl.ilias.shop.model.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 
 @Entity
 @Builder
+@Data
 @Audited
 @AllArgsConstructor
 @NoArgsConstructor
