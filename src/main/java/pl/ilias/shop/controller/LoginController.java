@@ -1,11 +1,10 @@
 package pl.ilias.shop.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.ilias.shop.model.dto.LoginDto;
 import pl.ilias.shop.model.dto.TokenDto;
-import pl.ilias.shop.service.LoginService;
+import pl.ilias.shop.security.LoginService;
 
 import javax.validation.Valid;
 

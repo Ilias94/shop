@@ -1,6 +1,5 @@
-package pl.ilias.shop.service;
+package pl.ilias.shop.security;
 
-import com.nimbusds.jwt.JWTClaimsSet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

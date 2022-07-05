@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.ilias.shop.mapper.ProductMapper;
 import pl.ilias.shop.model.dto.ProductDto;
@@ -30,16 +31,19 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ProductDto saveProduct(@RequestBody @Valid ProductDto product) {
         return productMapper.productToDto(productService.save(productMapper.productDtoToProduct(product)));
     }
 
     @PutMapping("{id}")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ProductDto updateProduct(@RequestBody ProductDto product, @PathVariable Long id) {
         return productMapper.productToDto(productService.update(productMapper.productDtoToProduct(product), id));
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProductById(@PathVariable Long id) {
         productService.deleteById(id);

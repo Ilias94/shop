@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import pl.ilias.shop.model.dao.User;
 import pl.ilias.shop.repository.RoleRepository;
 import pl.ilias.shop.repository.UserRepository;
+import pl.ilias.shop.security.SecurityUtils;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
@@ -49,5 +51,10 @@ public class UserService {
 
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    public User currentLoginUser() {
+        String userEmail = SecurityUtils.getUserName();
+        return userRepository.findByEmail(userEmail).orElseThrow(EntityNotFoundException::new);
     }
 }

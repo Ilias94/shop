@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.ilias.shop.mapper.UserMapper;
@@ -40,6 +41,7 @@ public class UserController {
 
 
     @PutMapping("{id}")
+    @PreAuthorize("isAuthenticated() && @securityService.hasAccessToUser(#id)")
     public UserDto updateUser(@RequestBody @Valid UserDto user, @PathVariable Long id) {
         return userMapper.userToDto(userService.update(userMapper.userDtoToUser(user), id));
     }
