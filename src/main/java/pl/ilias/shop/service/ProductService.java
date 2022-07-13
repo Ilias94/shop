@@ -16,13 +16,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ProducerService producerService;
 
-    public Product save(Product product) { //wstrzyknac producerService (Address address, Producer producer,)
+    public Product save(Product product, Long producerId) { //wstrzyknac producerService (Address address, Producer producer,)
+        product.setProducer(producerService.getByID(producerId));
         return productRepository.save(product);
     }
 
     public Product getById(Long id) {
-        return productRepository.getById(id);
+        return productRepository.getReferenceById(id);
     }
 
     public void deleteById(Long id) {
@@ -34,12 +36,12 @@ public class ProductService {
     }
 
     @Transactional
-    public Product update(Product product, Long id) {
+    public Product update(Product product, Long id, Long producerId) {
         Product productDb = getById(id);
         productDb.setName(product.getName());
-        productDb.setProducer(product.getProducer());
         productDb.setPrice(product.getPrice());
         productDb.setDescription(product.getDescription());
+        productDb.setProducer(producerService.getByID(producerId));
         return productDb;
     }
 

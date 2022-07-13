@@ -25,7 +25,7 @@ public class ProductDto {
     @NotNull
     private BigDecimal price;
     @NotNull
-    private ProducerDto producer;
+    private Long producerId;
     @NotNull
     @Positive
     private Integer quantity;

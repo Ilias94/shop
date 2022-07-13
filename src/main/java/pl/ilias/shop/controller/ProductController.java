@@ -33,13 +33,13 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ProductDto saveProduct(@RequestBody @Valid ProductDto product) {
-        return productMapper.productToDto(productService.save(productMapper.productDtoToProduct(product)));
+        return productMapper.productToDto(productService.save(productMapper.productDtoToProduct(product), product.getProducerId()));
     }
 
     @PutMapping("{id}")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ProductDto updateProduct(@RequestBody ProductDto product, @PathVariable Long id) {
-        return productMapper.productToDto(productService.update(productMapper.productDtoToProduct(product), id));
+        return productMapper.productToDto(productService.update(productMapper.productDtoToProduct(product), id, product.getProducerId()));
     }
 
     @DeleteMapping("{id}")

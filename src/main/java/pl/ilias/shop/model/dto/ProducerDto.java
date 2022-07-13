@@ -21,5 +21,5 @@ public class ProducerDto {
     @NotBlank
     private String name;
     @NotNull
-    private AddressDto address;
+    private Long addressId;
 }

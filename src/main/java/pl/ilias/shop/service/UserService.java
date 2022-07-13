@@ -23,7 +23,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public User save(User user) {
-        roleRepository.findByName("ROLE_USER").ifPresent(role -> user.setRoleList(Collections.singletonList(role)));
+        roleRepository.findByName("USER").ifPresent(role -> user.setRoleList(Collections.singletonList(role)));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

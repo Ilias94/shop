@@ -3,6 +3,7 @@ package pl.ilias.shop.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.ilias.shop.mapper.HistoryMapper;
 import pl.ilias.shop.model.dto.ProductDto;
@@ -13,6 +14,7 @@ import pl.ilias.shop.repository.UserRepository;
 @RestController
 @RequestMapping("/api/v1/histories")
 @RequiredArgsConstructor
+@PreAuthorize("hasAuthority('SCOPE_ADMIN')")
 public class HistoryController {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;

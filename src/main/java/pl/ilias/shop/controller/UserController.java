@@ -23,6 +23,7 @@ public class UserController {
     private final UserMapper userMapper;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public Page<UserDto> getUsers(@RequestParam int page, @RequestParam int size) {
         return userService.getPage(PageRequest.of(page, size)).map(userMapper::userToDto);
     }
@@ -41,12 +42,13 @@ public class UserController {
 
 
     @PutMapping("{id}")
-    @PreAuthorize("isAuthenticated() && @securityService.hasAccessToUser(#id)")
+    @PreAuthorize("isAuthenticated() && (@securityService.hasAccessToUser(#id) || hasAuthority('SCOPE_ADMIN'))")
     public UserDto updateUser(@RequestBody @Valid UserDto user, @PathVariable Long id) {
         return userMapper.userToDto(userService.update(userMapper.userDtoToUser(user), id));
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserById(@PathVariable Long id) {
         userService.deleteById(id);

@@ -22,7 +22,6 @@ public interface HistoryMapper {
     @Mapping(source ="entity.name", target = "name")
     @Mapping(source = "entity.description", target = "description")
     @Mapping(source = "entity.price", target = "price")
-    @Mapping(source = "entity.producer", target = "producer")
     @Mapping(source = "entity.quantity", target = "quantity")
     @Mapping(source = "requiredRevisionNumber", target = "revisionNumber")
     @Mapping(source = "metadata.revisionType", target = "revisionType")
