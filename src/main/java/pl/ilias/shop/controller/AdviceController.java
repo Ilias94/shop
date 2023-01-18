@@ -27,8 +27,9 @@ public class AdviceController {
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void handleConstraintViolationException(ConstraintViolationException constraintViolationException) {
+    public FieldErrorDto handleConstraintViolationException(ConstraintViolationException constraintViolationException) {
         log.warn("Bad parameters", constraintViolationException);
+        return new FieldErrorDto(null, null);
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
@@ -46,5 +47,5 @@ public class AdviceController {
         return allErrors.stream()
                 .map(objectError -> new FieldErrorDto(((FieldError) objectError).getField(), objectError.getDefaultMessage()))
                 .collect(Collectors.toList());
-    }
+    } 
 }

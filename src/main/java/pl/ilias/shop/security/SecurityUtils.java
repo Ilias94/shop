@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SecurityUtils {
-    public static String getUserName() {
+    public static String getCurrentUserEmail() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication != null ? authentication.getName() : null;
     }

@@ -13,7 +13,9 @@ import pl.ilias.shop.security.SecurityUtils;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -21,11 +23,17 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MailService mailService;
 
     public User save(User user) {
         roleRepository.findByName("USER").ifPresent(role -> user.setRoleList(Collections.singletonList(role)));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("firstName", user.getFirstName());
+        variables.put("lastName", user.getLastName());
+        mailService.sendEmail(user.getEmail(), "Welcome email", variables, null, null);
+        return user;
     }
 
     public User getById(Long id) {
@@ -54,7 +62,7 @@ public class UserService {
     }
 
     public User currentLoginUser() {
-        String userEmail = SecurityUtils.getUserName();
+        String userEmail = SecurityUtils.getCurrentUserEmail();
         return userRepository.findByEmail(userEmail).orElseThrow(EntityNotFoundException::new);
     }
 }

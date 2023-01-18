@@ -45,6 +45,4 @@ public class ProducerService {
     public List<Producer> getProducers() {
         return producerRepository.findAll();
     }
-
-
 }

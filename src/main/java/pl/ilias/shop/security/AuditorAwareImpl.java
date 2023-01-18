@@ -10,6 +10,6 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor() {
-        return Optional.ofNullable(SecurityUtils.getUserName());
+        return Optional.ofNullable(SecurityUtils.getCurrentUserEmail());
     }
 }

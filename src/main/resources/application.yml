@@ -9,11 +9,23 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: javashop71@gmail.com
+    password: vopvpzoshymllyhc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 jwt:
   publicKey: classpath:public-key.pem
   privateKey: classpath:pkcs8.key
 
-
-server:
-  error:
-    include-message: always
+file:
+  product: C:\Users\ilbel\OneDrive\Pulpit\spring\Images
+#server:
+#  error:
+#    include-message: always

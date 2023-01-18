@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.history.RevisionMetadata;
+import pl.ilias.shop.validator.ImageValid;
+import pl.ilias.shop.validator.group.Create;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -30,5 +32,6 @@ public class ProductDto {
     @Positive
     private Integer quantity;
     private Integer revisionNumber;
+    private String imagePath;
     private RevisionMetadata.RevisionType revisionType;
 }
