@@ -6,10 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.history.RevisionMetadata;
-import pl.ilias.shop.validator.ImageValid;
-import pl.ilias.shop.validator.group.Create;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @Data
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductDto {
+public class ProductDto extends AuditableDto {
     @Null
     private Long id;
     @NotBlank
