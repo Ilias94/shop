@@ -57,7 +57,7 @@ public class XlsFileStrategy implements FileStrategy {
                 row.createCell(2).setCellValue(product.getDescription());
                 row.createCell(3).setCellValue(product.getPrice().doubleValue());
                 row.createCell(4).setCellValue(product.getQuantity());
-                row.createCell(5).setCellValue(product.getCreateDate());
+                row.createCell(5).setCellValue(product.getCreatedDate());
                 row.createCell(6).setCellValue(product.getLastModifiedDate());
             }
 
