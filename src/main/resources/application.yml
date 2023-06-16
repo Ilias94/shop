@@ -20,12 +20,14 @@ spring:
           auth: true
           starttls:
             enable: true
+  flyway:
+    baseline-on-migrate: true
 jwt:
   publicKey: classpath:public-key.pem
   privateKey: classpath:pkcs8.key
 
 file:
   product: C:\Users\ilbel\OneDrive\Pulpit\spring\Images
-#server:
-#  error:
-#    include-message: always
+
+info:
+  version: "@pom.version@"
