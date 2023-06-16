@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.history.RevisionMetadata;
 import pl.ilias.shop.validator.PasswordValid;
@@ -15,12 +16,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @PasswordValid(groups = Create.class)
-public class UserDto {
+public class UserDto extends AuditableDto {
     @Null
     private Long id;
     @NotBlank

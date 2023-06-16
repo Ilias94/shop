@@ -6,7 +6,7 @@ import pl.ilias.shop.model.dao.User;
 import pl.ilias.shop.model.dto.UserDto;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface UserMapper extends AuditableMapper<User, UserDto> {
     @Mapping(target = "password", ignore = true)
     UserDto userToDto(User user);
 
